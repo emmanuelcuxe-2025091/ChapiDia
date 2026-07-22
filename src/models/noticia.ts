@@ -4,7 +4,7 @@ export interface Noticia {
     idNoticia: number;
     titulo: string;
     contenido: string;
-    fechaNoticia: string;
+    fechaNoticia: Date;
     imagenNoticia: string;
     estado: Estado;
     idUsuario: number;

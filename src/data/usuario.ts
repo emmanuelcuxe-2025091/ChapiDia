@@ -2,10 +2,10 @@ import { Usuario } from '../models/usuario';
 
 export const usuarios: Usuario[] = [
     {
-        idUsurio: 1,
-        nombre: 'Emmmanuel',
-        email: 'ecuxe-2025091@kinal.edu.gt',
-        contrasena: 'asd123',
-        rol: 'fotografo'
+        idUsuario: 1,
+        nombre: "Emmmanuel",
+        email: "ecuxe-2025091@kinal.edu.gt",
+        contrasena: "asd123",
+        rol: "fotografo"
     }
 ];
