@@ -1,9 +1,11 @@
 import { createServer } from "http";
-import { routes } from "./router";
+import { mainRouter } from "./routes";
 
 const servidor = createServer(async (req, res) => {
 
-    await routes(req, res);
+    res.setHeader("Content-Type", "application/json");
+
+    await mainRouter(req, res);
 
 });
 
