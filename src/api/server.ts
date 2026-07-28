@@ -1,5 +1,5 @@
 import { createServer } from "http";
-import { mainRouter } from "./routes";
+import { mainRouter } from "./router";
 
 const servidor = createServer(async (req, res) => {
 
