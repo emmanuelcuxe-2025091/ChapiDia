@@ -3,7 +3,7 @@ import { readFile, writeFile } from 'fs/promises';
 
 const ruta = "./src/data/comentario.json";
 
-export class noticiaRepository {
+export class comentarioRepository {
 
     private async leerComentario(): Promise<Comentario[]> {
         try {

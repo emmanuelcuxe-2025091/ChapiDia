@@ -3,7 +3,7 @@ import { readFile, writeFile } from 'fs/promises';
 
 const ruta = "./src/data/like.json";
 
-export class noticiaRepository {
+export class likeRepository {
 
     private async leerLike(): Promise<Like[]> {
         try {
