@@ -1,8 +1,8 @@
-import { UsuarioRepository } from '../data/usuarioRepository';
+import { usuarioRepository } from '../data/usuarioRepository';
 import { Usuario } from '../models/usuario';
 
-export class UsuarioService {
-    private repository = new UsuarioRepository();
+export class usuarioService {
+    private repository = new usuarioRepository();
 
     public async obtenerUsuarios(): Promise<Usuario[]> {
         return await this.repository.findAll();
@@ -86,10 +86,9 @@ export class UsuarioService {
 
         await this.repository.update(usuarioActualizado.idUsuario, usuarioActualizado);
     }
-    
+
 
     public async eliminarUsuario(id: number): Promise<void> {
-
         const eliminado = await this.repository.delete(id);
         
         if (!eliminado) {

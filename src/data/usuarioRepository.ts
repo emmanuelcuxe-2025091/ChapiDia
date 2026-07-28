@@ -3,7 +3,7 @@ import { Usuario } from '../models/usuario';
 
 const ruta = "./src/data/usuario.json"
 
-export class UsuarioRepository {
+export class usuarioRepository {
 
     private async leerUsuario(): Promise<Usuario[]> {
         try {

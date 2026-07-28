@@ -1,7 +1,7 @@
 import { categoriaRepository } from '../data/categoriaRepository';
 import { Categoria } from '../models/categoria';
 
-export class CategoriaService {
+export class categoriaService {
     private repository = new categoriaRepository();
 
     public async obtenerCategorias(): Promise<Categoria[]> {
