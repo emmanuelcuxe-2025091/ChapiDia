@@ -1,6 +1,6 @@
 import { Noticia } from "../models/noticia";
 
-export class NoticiaClient {
+export class noticiaCliente {
     private URL = "http://localhost:3000/noticias";
 
     public async obtenerNoticias(): Promise<Noticia[]> {

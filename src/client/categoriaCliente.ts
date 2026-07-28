@@ -1,6 +1,6 @@
 import { Categoria } from "../models/categoria";
 
-export class CategoriaClient {
+export class categoriaCliente {
     private URL = "http://localhost:3000/categorias";
 
     public async obtenerCategorias(): Promise<Categoria[]> {

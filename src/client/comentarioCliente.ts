@@ -1,6 +1,6 @@
 import { Comentario } from "../models/comentario";
 
-export class ComentarioClient {
+export class comentarioCliente {
     private URL = "http://localhost:3000/comentarios";
 
     public async obtenerComentarios(): Promise<Comentario[]> {

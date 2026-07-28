@@ -1,6 +1,6 @@
 import { Like } from "../models/like";
 
-export class LikeClient {
+export class likeCliente {
     private URL = "http://localhost:3000/likes";
 
     public async obtenerLikes(): Promise<Like[]> {

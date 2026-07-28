@@ -1,6 +1,6 @@
 import { Usuario } from "../models/usuario";
 
-export class UsuarioClient {
+export class usuarioCliente {
     private URL = "http://localhost:3000/usuarios";
 
     public async obtenerUsuarios(): Promise<Usuario[]> {
