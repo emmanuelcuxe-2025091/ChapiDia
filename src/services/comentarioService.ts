@@ -26,19 +26,35 @@ export class comentarioService {
 
     public async crearComentario(data: Comentario): Promise<Comentario> {
 
-        const usuarioExiste = await this.usuarioRepo.findById(data.idUsuario);
-        const noticiaExiste = await this.noticiaRepo.findById(data.idNoticia);
-
         if (!data.texto || data.texto.trim().length === 0) {
             throw new Error("El comentario no puede estar vacío.");
         }
 
-        if (!usuarioExiste) {
-            throw new Error("El usuario que intenta comentar no existe.");
+        if (!data.idUsuario) {
+            throw new Error("El idUsuario es obligatorio.");
         }
 
+        if (!data.idNoticia) {
+            throw new Error("El idNoticia es obligatorio.");
+        }
+
+        const comentarios = await this.repository.findAll();
+        if (comentarios.find(c => c.idComentario === data.idComentario)) {
+            throw new Error("Ya existe un comentario con ese ID.");
+        }
+
+        const usuarioExiste = await this.usuarioRepo.findById(data.idUsuario);
+        if (!usuarioExiste) {
+            throw new Error("El usuario no existe.");
+        }
+
+        const noticiaExiste = await this.noticiaRepo.findById(data.idNoticia);
         if (!noticiaExiste) {
-            throw new Error("La noticia que intenta comentar no existe.");
+            throw new Error("La noticia no existe.");
+        }
+
+        if (!data.fecha) {
+            data.fecha = new Date();
         }
         
         await this.repository.create(data);
@@ -51,7 +67,25 @@ export class comentarioService {
 
         if (!existe) {
             throw new Error("Comentario no encontrado.");
-        };
+        }
+
+        if (comentarioActualizado.texto !== undefined && comentarioActualizado.texto.trim().length === 0) {
+            throw new Error("El comentario no puede estar vacío.");
+        }
+
+        if (comentarioActualizado.idUsuario !== undefined) {
+            const usuarioExiste = await this.usuarioRepo.findById(comentarioActualizado.idUsuario);
+            if (!usuarioExiste) {
+                throw new Error("El usuario indicado no existe.");
+            }
+        }
+
+        if (comentarioActualizado.idNoticia !== undefined) {
+            const noticiaExiste = await this.noticiaRepo.findById(comentarioActualizado.idNoticia);
+            if (!noticiaExiste) {
+                throw new Error("La noticia indicada no existe.");
+            }
+        }
 
         await this.repository.update(comentarioActualizado.idComentario, comentarioActualizado);
     }
@@ -61,7 +95,7 @@ export class comentarioService {
         const eliminado = await this.repository.delete(id);
 
         if (!eliminado) {
-            throw new Error("Comentario no encontrado.");
+            throw new Error("Comentario no existente.");
         }
     }
 }

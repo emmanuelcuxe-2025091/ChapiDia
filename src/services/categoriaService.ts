@@ -23,8 +23,16 @@ export class categoriaService {
     public async crearCategoria(data: Categoria): Promise<Categoria> {
         const categorias = await this.repository.findAll();
         
-        if (!data.nombreCategoria) {
+        if (!data.nombreCategoria || data.nombreCategoria.trim() === "") {
             throw new Error("El nombre de la categoría es obligatorio.");
+        }
+
+        if (!data.descripcion || data.descripcion.trim() === "") {
+            throw new Error("La descripción es obligatoria.");
+        }
+
+        if (categorias.find(c => c.idCategoria === data.idCategoria)) {
+            throw new Error("Ya existe una categoría con ese ID.");
         }
 
         if (categorias.find(c => c.nombreCategoria.toLowerCase() === data.nombreCategoria.toLowerCase())) {
@@ -42,6 +50,26 @@ export class categoriaService {
         if (!existe) {
             throw new Error("Categoría no encontrada.");
         }
+
+        if (catActualizada.nombreCategoria !== undefined) {
+            if (catActualizada.nombreCategoria.trim() === "") {
+                throw new Error("El nombre de la categoría no puede estar vacío.");
+            }
+
+            const categorias = await this.repository.findAll();
+            const duplicada = categorias.find(c =>
+                c.idCategoria !== catActualizada.idCategoria &&
+                c.nombreCategoria.toLowerCase() === catActualizada.nombreCategoria.toLowerCase()
+            );
+
+            if (duplicada) {
+                throw new Error("Ya existe otra categoría con ese nombre.");
+            }
+        }
+
+        if (catActualizada.descripcion !== undefined && catActualizada.descripcion.trim() === "") {
+            throw new Error("La descripción no puede estar vacía.");
+        }
         
         await this.repository.update(catActualizada.idCategoria, catActualizada);
     }
@@ -51,7 +79,7 @@ export class categoriaService {
         const eliminado = await this.repository.delete(id);
 
         if (!eliminado) {
-            throw new Error("Categoría no encontrada.");
+            throw new Error("Categoría no existente.");
         }
     }
 }
